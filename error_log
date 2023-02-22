@@ -1,0 +1,1 @@
+[05-Sep-2022 13:47:04 UTC] PHP Fatal error:  Cannot declare class CreatePermissionsTable, because the name is already in use in /home/v3kx1uk5hrhm/public_html/doniaservices.com/database/migrations/2022_09_05_000003_create_permissions_table.php on line 7

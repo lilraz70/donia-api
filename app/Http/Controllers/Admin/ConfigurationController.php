@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
+use App\Models\Configuration;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\Facades\DataTables;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Traits\CsvImportTrait;
-use App\Http\Requests\MassDestroyConfigurationRequest;
 use App\Http\Requests\StoreConfigurationRequest;
 use App\Http\Requests\UpdateConfigurationRequest;
-use App\Models\Configuration;
-use Gate;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\MassDestroyConfigurationRequest;
 
 class ConfigurationController extends Controller
 {

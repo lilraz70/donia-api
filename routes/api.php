@@ -1,18 +1,42 @@
 <?php
 
 
-use App\Http\Controllers\Api\ForgotPasswordController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\V1\Admin\UserController;
+use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\V1\Admin\BesoinController;
+use App\Http\Controllers\Api\V1\Admin\ReleaseGoodApiController;
+
+
+//////////////////////:razak///////////////////
+Route::post("store_user", [UserController::class, 'store']);
+Route::post("user_login_by_phone", [UserController::class, 'loginByPhone']);
+Route::post("user_login_by_google", [UserController::class, 'loginByGoogle']);
+Route::post("user_login_by_facebook", [UserController::class, 'loginByFacebook']);
+//////////////////////////end//////////////////
+
+
+
 
 Route::post('register', 'Api\\AuthController@register');
 Route::post('login', 'Api\\AuthController@login');
-Route::post('logout', 'Api\\AuthController@logout');
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('loginphone', 'Api\\AuthController@loginphone');
 
 Route::post('password/forgot-password', [ForgotPasswordController::class, 'sendResetLinkResponse'])->name('passwords.sent');
 Route::post('password/reset', [ResetPasswordController::class, 'sendResetResponse'])->name('passwords.reset');
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
+
+
+//////////////////RAZAK///////////////////////
+
+Route::post("change_profil_picture/{id}", [UserController::class, 'changeProfilPicture']);
+
+//////////////////END/////////////////////////
+
     // Users
     Route::post('users/media', 'UsersApiController@storeMedia')->name('users.storeMedia');
     Route::apiResource('users', 'UsersApiController');
@@ -181,7 +205,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('carpools', 'CarpoolsApiController');
 
     // Release Good
-    Route::apiResource('release-goods', 'ReleaseGoodApiController');
+    Route::resource('release-goods', ReleaseGoodApiController::class);
 
     //*** search release good
         Route::get('release-goods-search/{user_id}', 'ReleaseGoodApiController@search');
@@ -239,4 +263,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('bookreleasegoods', 'BookreleasegoodApiController');
 
      //Route::post('bookreleasegood/{user_id}', 'BookreleasegoodApiController@search');
+     // Besoin
+     //////////////////////:razak///////////////////
+Route::put("update_user/{id}", [UserController::class, 'update']);
+Route::apiResource('besoins', BesoinController::class);
+Route::get('user-besoin/{id}',[ BesoinController::class, 'userBesoin']);
+Route::put("change_profil_picture/{id}", [UserController::class, 'changeProfilPicture']);
+Route::get('destroye-release-good/{id}',[ReleaseGoodApiController::class, 'destroyRelease']);
+Route::post("upload_image", [ReleaseGoodApiController::class, 'uploadImage']);
+
+//////////////////////////end//////////////////
+
 });

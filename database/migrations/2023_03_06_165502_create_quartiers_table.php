@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('quartiers', function (Blueprint $table) {
+            $table->comment('');
+            $table->bigIncrements('id');
+            $table->string('intitule', 255);
+            $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('set_countries_id')->nullable();
+            $table->unsignedBigInteger('city_id')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('quartiers');
+    }
+};

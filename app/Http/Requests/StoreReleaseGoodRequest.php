@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Models\ReleaseGood;
-use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StoreReleaseGoodRequest extends FormRequest
 {
@@ -55,7 +56,18 @@ class StoreReleaseGoodRequest extends FormRequest
                 'required',
 
             ],
-            
+            'setcountry_id' => [
+                'required',
+
+            ],
+            'image_url' => [
+                'nullable',
+            ],
+            'other_image' => [
+                'nullable',
+                'array'
+            ],
+
         ];
     }
 }

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Models\Image;
 use \DateTimeInterface;
 use App\Traits\Auditable;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReleaseGood extends Model
 {
@@ -65,6 +66,7 @@ class ReleaseGood extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'image_url'
     ];
 
     public function getDateSortiPrevuAttribute($value)
@@ -139,5 +141,9 @@ class ReleaseGood extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

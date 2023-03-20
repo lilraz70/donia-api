@@ -17,11 +17,10 @@ use App\Models\Quartier;
 use App\Models\ReleaseGood;
 use App\Models\SetCountry;
 use App\Models\User;
-use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\Gate;
 class ReleaseGoodController extends Controller
 {
     use CsvImportTrait;

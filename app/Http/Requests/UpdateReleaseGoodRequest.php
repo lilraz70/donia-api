@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\ReleaseGood;
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateReleaseGoodRequest extends FormRequest
 {
@@ -18,20 +18,20 @@ class UpdateReleaseGoodRequest extends FormRequest
     {
         return [
             'date_sorti_prevu' => [
-                'required',
+                'nullable',
 //                 'date_format:' . config('panel.date_format'),
             ],
             'conditions_bailleur' => [
-                'required',
+                'nullable',
             ],
             'nb_chambre' => [
-                'required',
+                'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
             'localisation' => [
-                'required',
+                'nullable',
             ],
             'geolocalisation' => [
                 'string',
@@ -43,48 +43,56 @@ class UpdateReleaseGoodRequest extends FormRequest
             ],
             'contact_bailleur' => [
                 'string',
-                'required',
+                'nullable',
             ],
             'accord_bailleur' => [
                 'string',
                 'nullable',
             ],
             'propertytype_id' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             'setcountry_id' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             'city_id' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             'quartier_id' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             /* 'user_id' => [
-                'required',
+                'nullable',
                 'integer',
             ], */
             'emergencylevel_id' => [
-                'required',
+                'nullable',
                 'integer',
             ],
             'libelle' => [
                 'string',
                 'nullable',
             ],
+            'commentaires' => [
+                'string',
+                'nullable',
+            ],
             'cout' => [
-                'required',
+                'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
             'loyer_augmentera' => [
-                'required',
+                'nullable',
+            ], 
+            'delete_image_id' => [
+                'nullable',
+                'array'
             ],
         ];
     }

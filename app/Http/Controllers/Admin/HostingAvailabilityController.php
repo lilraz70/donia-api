@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Lodging;
+use Illuminate\Http\Request;
+use App\Models\HostingAvailability;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\Facades\DataTables;
+use Symfony\Component\HttpFoundation\Response;
+
 use App\Http\Controllers\Traits\CsvImportTrait;
-use App\Http\Requests\MassDestroyHostingAvailabilityRequest;
 use App\Http\Requests\StoreHostingAvailabilityRequest;
 use App\Http\Requests\UpdateHostingAvailabilityRequest;
-use App\Models\HostingAvailability;
-use App\Models\Lodging;
-use Gate;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\MassDestroyHostingAvailabilityRequest;
 
 class HostingAvailabilityController extends Controller
 {

@@ -12,14 +12,14 @@ class AuthController extends Controller
     //
     public function register(Request $request)
     {
-       // return response()->json("oui");
+        // return response()->json("oui");
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'username' =>'required|unique:users',
+            'username' => 'required|unique:users',
             'phone' => 'required|unique:users',
-            'set_countries_id' =>'required'
+            'set_countries_id' => 'required'
         ]);
 
 
@@ -93,14 +93,17 @@ class AuthController extends Controller
         ]);
     }
 
-
-   public function logout()
+    public function logout(Request $request)
     {
-
-            auth()->logout();
-
-        return response()->json();
+        try {
+            $user = $request->user();
+            $user->tokens()->delete();
+            return response()->json([
+                "success" => true,
+                'message' => 'Déconnexion réussie'
+            ], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
-
-
 }

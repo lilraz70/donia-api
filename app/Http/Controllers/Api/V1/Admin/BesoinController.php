@@ -64,7 +64,7 @@ class BesoinController extends AdminBaseController
         return $this->sendError("La création à echoué", $e->errors(),);
     } catch (\Throwable $th) {
        // logger()->error($th);
-        return $this->sendError("Une erreur s'est produite lors de la création ", $th,);
+        return $this->sendError("Une erreur s'est produite lors de la création ", $th->getMessage(),);
     }
 
    }
@@ -154,7 +154,7 @@ class BesoinController extends AdminBaseController
             return $this->sendError("l'utilisateur n'existe pas",);
           }
         } catch (\Throwable $th) {
-           return $this->sendError("Une erreur s'est produite lors de la récupéation des besoins ", $th,);
+           return $this->sendError("Une erreur s'est produite lors de la récupéation des besoins ", $th->getMessage(),);
         }
 
     }
